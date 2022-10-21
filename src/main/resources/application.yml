@@ -1,0 +1,39 @@
+server:
+  port: 10010
+
+spring:
+  application:
+    name: docker-boot
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/db01?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: root
+    password: root
+    hikari:
+      pool-name: Hikari
+      connection-timeout: 5000
+      idle-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      max-lifetime: 60000
+      auto-commit: true
+  redis:
+    host: redis
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 5
+        max-idle: 5
+
+mybatis:
+  mapperLocations: classpath*:sqlmap/**/*.xml
+  typeAliasesPackage: com.recluseode.dockerboot.entity
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+
+logging:
+  level:
+    com.recluseode.dockerboot.repository: debug
+
+spring.output.ansi.enabled: always
